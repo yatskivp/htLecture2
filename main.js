@@ -1,6 +1,6 @@
-	class Fighter{
+class Fighter{
 
-		constructor(name,power,health){
+		constructor(name="Name",power=100,health=1000){
 			this.name = name;
 			this.power = power;
 			this.health = health;
@@ -24,24 +24,22 @@
 		}
 	}
 
-	let fighter = new Fighter('Pupkin',100,990);
-	let improvedFighter = new ImprovedFighter('Vasa',99,10000);
+	let fighter = new Fighter('Pupkin',99,1000);
+	let improvedFighter = new ImprovedFighter('Vasa',99,1000);
+
+	let rand = (ln) => Math.floor(Math.random()*ln);
 
 	(function fight(fighter,improvedFighter, ...point){
 		for(let i=0; i<point.length; i++){
-			if(fighter.health != 0 || improvedFighter.health != 0){
-				fighter.hit(improvedFighter,point[i]);
+				fighter.hit(improvedFighter,point[rand(point.length)]);
 				if(fighter.health <= 0){
 					console.log(`${fighter.name} is dead`);
 					return;
 				}
-				improvedFighter.hit(fighter,point[i]);				
+				improvedFighter.hit(fighter,point[rand(point.length)]);				
 				if(improvedFighter.health <= 0){
 					console.log(`${improvedFighter.name} is dead`);
 					return;
 				}
-			}else{
-				console.log('Somebody is dead:))');
-			}
 		}
 	})(fighter,improvedFighter,10,20,11,3);
